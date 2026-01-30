@@ -5,3 +5,4 @@
 ^docs$
 ^_pkgdown\.yml$
 ^coverage\.txt$
+^LICENSE\.md$

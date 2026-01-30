@@ -1,0 +1,31 @@
+Package: marinepredator
+Type: Package
+Title: Marine Predators Algorithm
+Version: 0.0.0.9000
+Authors@R: 
+    c(person("Marc", "Grossouvre", , "marc@grossouvre.fr", role = c("trl", "cre"),
+           comment = "R implementation"),
+    person("Afshin",  "Faramarzi", , , role = "aut", comment = "Original MATLAB code"),
+    person("Seyedali", "Mirjalili", , , role = "aut", comment = "Original MATLAB code"))
+Description: Implementation of the Marine Predators Algorithm (MPA) in R. MPA is a
+    nature-inspired optimization algorithm that follows the rules governing optimal
+    foraging strategy and encounter rate policy between predator and prey in marine
+    ecosystems. Based on the paper by Faramarzi et al. (2020)
+    <doi:10.1016/j.eswa.2020.113377>.
+License: file LICENSE
+URL: https://github.com/urbs-dev/marinepredator
+BugReports: https://github.com/urbs-dev/marinepredator/issues
+Language: en
+Encoding: UTF-8
+Imports: dplyr, stats
+Suggests: testthat (>= 3.0.0), covr, pkgdown, knitr, rmarkdown
+VignetteBuilder: knitr
+RoxygenNote: 7.3.3
+Config/testthat/edition: 3
+NeedsCompilation: no
+Packaged: 2026-01-30 13:06:22 UTC; marcgrossouvre2
+Author: Marc Grossouvre [trl, cre] (R implementation),
+  Afshin Faramarzi [aut] (Original MATLAB code),
+  Seyedali Mirjalili [aut] (Original MATLAB code)
+Maintainer: Marc Grossouvre <marc@grossouvre.fr>
+Built: R 4.5.2; ; 2026-01-30 13:06:50 UTC; unix

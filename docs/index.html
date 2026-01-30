@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Marine Predators Algorithm • mpa</title>
+<title>Marine Predators Algorithm • marinepredator</title>
 <!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="bootstrap-toc.css">
 <script src="bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
@@ -32,7 +32,7 @@
         <span class="icon-bar"></span>
       </button>
       <span class="navbar-brand">
-        <a class="navbar-link" href="index.html">mpa</a>
+        <a class="navbar-link" href="index.html">marinepredator</a>
         <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.0.0.9000</span>
       </span>
     </div>
@@ -57,7 +57,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/urbs-dev/mpa/" class="external-link">
+  <a href="https://github.com/urbs-dev/marinepredator/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
 
   </a>
@@ -74,16 +74,261 @@
 
       </header><div class="row">
   <div class="contents col-md-9">
-Implementation of the Marine Predators Algorithm (MPA) in R. MPA is a nature-inspired optimization algorithm that follows the rules governing optimal foraging strategy and encounter rate policy between predator and prey in marine ecosystems. Based on the paper by Faramarzi et al. (2020) &lt;<a href="https://doi.org/10.1016/j.eswa.2020.113377" class="external-link">doi:10.1016/j.eswa.2020.113377</a>&gt;.
+<div class="section level1">
+<div class="page-header"><h1 id="marine-predators-algorithm-in-r-mpa">Marine Predators Algorithm in R (mpa)<a class="anchor" aria-label="anchor" href="#marine-predators-algorithm-in-r-mpa"></a>
+</h1></div>
+<!-- badges: start -->
+
+<p><strong>mpa</strong> is an R implementation of the Marine Predators Algorithm (MPA), a nature-inspired metaheuristic optimization algorithm. This package provides a complete implementation of the MPA algorithm as described in the original paper by Faramarzi et al. (2020).</p>
+<p><strong>Documentation</strong>: <a href=""></a></p>
+<div class="section level2">
+<h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
+</h2>
+<p>You can install the development version of mpa from GitHub:</p>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Install remotes if not already installed</span></span>
+<span><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">require</a></span><span class="op">(</span><span class="st"><a href="https://remotes.r-lib.org" class="external-link">"remotes"</a></span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"remotes"</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="co"># Install marinepredator</span></span>
+<span><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span>repo <span class="op">=</span> <span class="st">"urbs-dev/marinepredator"</span><span class="op">)</span></span></code></pre></div>
+</div>
+<div class="section level2">
+<h2 id="overview">Overview<a class="anchor" aria-label="anchor" href="#overview"></a>
+</h2>
+<p>The Marine Predators Algorithm (MPA) is inspired by the foraging behavior of marine predators and their interactions with prey. The algorithm follows these key principles:</p>
+<ol style="list-style-type: decimal">
+<li><p><strong>Lévy and Brownian Movement</strong>: Marine predators use Lévy strategy for environments with low prey concentration and Brownian movement for areas with abundant prey.</p></li>
+<li>
+<p><strong>Velocity Ratios</strong>: The algorithm considers different velocity ratios between predators and prey:</p>
+<ul>
+<li>High velocity ratio (prey moves faster)</li>
+<li>Unit velocity ratio (similar speeds)</li>
+<li>Low velocity ratio (predator moves faster)</li>
+</ul>
+</li>
+<li><p><strong>Memory</strong>: Predators remember successful foraging locations and their associates.</p></li>
+<li><p><strong>Environmental Effects</strong>: The algorithm models natural phenomena like eddy formation and FADs (Fish Aggregating Devices).</p></li>
+</ol>
+</div>
+<div class="section level2">
+<h2 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a>
+</h2>
+<div class="section level3">
+<h3 id="basic-example">Basic Example<a class="anchor" aria-label="anchor" href="#basic-example"></a>
+</h3>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/urbs-dev/marinepredator" class="external-link">marinepredator</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Optimize the Sphere function (F01)</span></span>
+<span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/mpa.html">mpa</a></span><span class="op">(</span></span>
+<span>  SearchAgents_no <span class="op">=</span> <span class="fl">25</span>,    <span class="co"># Number of search agents</span></span>
+<span>  Max_iter <span class="op">=</span> <span class="fl">100</span>,          <span class="co"># Maximum iterations</span></span>
+<span>  lb <span class="op">=</span> <span class="op">-</span><span class="fl">100</span>,               <span class="co"># Lower bound</span></span>
+<span>  ub <span class="op">=</span> <span class="fl">100</span>,                <span class="co"># Upper bound</span></span>
+<span>  dim <span class="op">=</span> <span class="fl">30</span>,                <span class="co"># Number of dimensions</span></span>
+<span>  fobj <span class="op">=</span> <span class="va">F01</span>               <span class="co"># Objective function</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Print results</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></span></code></pre></div>
+</div>
+<div class="section level3">
+<h3 id="using-benchmark-functions">Using Benchmark Functions<a class="anchor" aria-label="anchor" href="#using-benchmark-functions"></a>
+</h3>
+<p>The package includes 23 standard benchmark functions:</p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Get function details</span></span>
+<span><span class="va">details</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/get_function_details.html">get_function_details</a></span><span class="op">(</span><span class="st">"F01"</span><span class="op">)</span>  <span class="co"># Sphere function</span></span>
+<span></span>
+<span><span class="co"># Run optimization</span></span>
+<span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/mpa.html">mpa</a></span><span class="op">(</span></span>
+<span>  SearchAgents_no <span class="op">=</span> <span class="fl">25</span>,</span>
+<span>  Max_iter <span class="op">=</span> <span class="fl">100</span>,</span>
+<span>  lb <span class="op">=</span> <span class="va">details</span><span class="op">$</span><span class="va">lb</span>,</span>
+<span>  ub <span class="op">=</span> <span class="va">details</span><span class="op">$</span><span class="va">ub</span>,</span>
+<span>  dim <span class="op">=</span> <span class="va">details</span><span class="op">$</span><span class="va">dim</span>,</span>
+<span>  fobj <span class="op">=</span> <span class="va">details</span><span class="op">$</span><span class="va">fobj</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+</div>
+<div class="section level3">
+<h3 id="custom-functions">Custom Functions<a class="anchor" aria-label="anchor" href="#custom-functions"></a>
+</h3>
+<p>You can use MPA with your own objective functions:</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Define a custom function</span></span>
+<span><span class="va">custom_function</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="kw"><a href="https://rdrr.io/r/base/function.html" class="external-link">return</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="op">(</span><span class="va">x</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span><span class="op">)</span>  <span class="co"># Minimum at (1, 2, 3)</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="co"># Run optimization</span></span>
+<span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/mpa.html">mpa</a></span><span class="op">(</span></span>
+<span>  SearchAgents_no <span class="op">=</span> <span class="fl">20</span>,</span>
+<span>  Max_iter <span class="op">=</span> <span class="fl">50</span>,</span>
+<span>  lb <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">10</span>, <span class="op">-</span><span class="fl">10</span>, <span class="op">-</span><span class="fl">10</span><span class="op">)</span>,</span>
+<span>  ub <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">10</span>, <span class="fl">10</span><span class="op">)</span>,</span>
+<span>  dim <span class="op">=</span> <span class="fl">3</span>,</span>
+<span>  fobj <span class="op">=</span> <span class="va">custom_function</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+</div>
+</div>
+<div class="section level2">
+<h2 id="available-functions">Available Functions<a class="anchor" aria-label="anchor" href="#available-functions"></a>
+</h2>
+<div class="section level3">
+<h3 id="main-algorithm">Main Algorithm<a class="anchor" aria-label="anchor" href="#main-algorithm"></a>
+</h3>
+<ul>
+<li>
+<code><a href="reference/mpa.html">mpa()</a></code>: Main Marine Predators Algorithm implementation</li>
+<li>
+<code><a href="reference/print.mpa_result.html">print.mpa_result()</a></code>: Print method for MPA results</li>
+</ul>
+</div>
+<div class="section level3">
+<h3 id="helper-functions">Helper Functions<a class="anchor" aria-label="anchor" href="#helper-functions"></a>
+</h3>
+<ul>
+<li>
+<code><a href="reference/initialize_population.html">initialize_population()</a></code>: Initialize the search agent population</li>
+<li>
+<code><a href="reference/levy.html">levy()</a></code>: Generate Lévy flight random steps</li>
+<li>
+<code><a href="reference/get_function_details.html">get_function_details()</a></code>: Get details for benchmark functions</li>
+</ul>
+</div>
+<div class="section level3">
+<h3 id="benchmark-functions-f01-f23">Benchmark Functions (F01-F23)<a class="anchor" aria-label="anchor" href="#benchmark-functions-f01-f23"></a>
+</h3>
+<ul>
+<li>
+<code><a href="reference/F01.html">F01()</a></code>: Sphere function</li>
+<li>
+<code><a href="reference/F02.html">F02()</a></code>: Sum of absolute values and products</li>
+<li>
+<code><a href="reference/F03.html">F03()</a></code>: Sum of squared terms</li>
+<li>
+<code><a href="reference/F04.html">F04()</a></code>: Maximum absolute value</li>
+<li>
+<code><a href="reference/F05.html">F05()</a></code>: Rosenbrock function</li>
+<li>
+<code><a href="reference/F06.html">F06()</a></code>: Shifted sphere function</li>
+<li>
+<code><a href="reference/F07.html">F07()</a></code>: Quartic function with noise</li>
+<li>
+<code><a href="reference/F08.html">F08()</a></code>: Schwefel function</li>
+<li>
+<code><a href="reference/F09.html">F09()</a></code>: Rastrigin function</li>
+<li>
+<code><a href="reference/F10.html">F10()</a></code>: Ackley function</li>
+<li>
+<code><a href="reference/F11.html">F11()</a></code>: Griewank function</li>
+<li>
+<code><a href="reference/F12.html">F12()</a></code>: Penalized function 1</li>
+<li>
+<code><a href="reference/F13.html">F13()</a></code>: Penalized function 2</li>
+<li>
+<code><a href="reference/F14.html">F14()</a></code>: Shekel’s Foxholes</li>
+<li>
+<code><a href="reference/F15.html">F15()</a></code>: Kowalik function</li>
+<li>
+<code><a href="reference/F16.html">F16()</a></code>: Six-Hump Camel Back</li>
+<li>
+<code><a href="reference/F17.html">F17()</a></code>: Branin function</li>
+<li>
+<code><a href="reference/F18.html">F18()</a></code>: Goldstein-Price function</li>
+<li>
+<code><a href="reference/F19.html">F19()</a></code>: Hartman 3D function</li>
+<li>
+<code><a href="reference/F20.html">F20()</a></code>: Hartman 6D function</li>
+<li>
+<code><a href="reference/F21.html">F21()</a></code>: Shekel 5 function</li>
+<li>
+<code><a href="reference/F22.html">F22()</a></code>: Shekel 7 function</li>
+<li>
+<code><a href="reference/F23.html">F23()</a></code>: Shekel 10 function</li>
+</ul>
+</div>
+</div>
+<div class="section level2">
+<h2 id="demo">Demo<a class="anchor" aria-label="anchor" href="#demo"></a>
+</h2>
+<p>See the <code>demo/</code> directory for complete usage examples:</p>
+<ul>
+<li>
+<code>mpaBenchmark.R</code>: Comprehensive examples of using MPA with benchmark functions</li>
+</ul>
+</div>
+<div class="section level2">
+<h2 id="algorithm-parameters">Algorithm Parameters<a class="anchor" aria-label="anchor" href="#algorithm-parameters"></a>
+</h2>
+<p>The MPA algorithm has several key parameters:</p>
+<ul>
+<li>
+<code>SearchAgents_no</code>: Number of search agents (predators) in the population</li>
+<li>
+<code>Max_iter</code>: Maximum number of iterations</li>
+<li>
+<code>FADs</code>: Fish Aggregating Devices parameter (default: 0.2)</li>
+<li>
+<code>P</code>: Prey movement probability (default: 0.5)</li>
+</ul>
+</div>
+<div class="section level2">
+<h2 id="performance">Performance<a class="anchor" aria-label="anchor" href="#performance"></a>
+</h2>
+<p>The algorithm’s performance can be evaluated using the convergence curve:</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Plot convergence curve</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">result</span><span class="op">$</span><span class="va">Convergence_curve</span>, type <span class="op">=</span> <span class="st">"l"</span>, col <span class="op">=</span> <span class="st">"blue"</span>, lwd <span class="op">=</span> <span class="fl">2</span>,</span>
+<span>     main <span class="op">=</span> <span class="st">"MPA Convergence Curve"</span>,</span>
+<span>     xlab <span class="op">=</span> <span class="st">"Iteration"</span>, ylab <span class="op">=</span> <span class="st">"Best Fitness"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/grid.html" class="external-link">grid</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+</div>
+<div class="section level2">
+<h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
+</h2>
+<p>Faramarzi, A., Heidarinejad, M., Mirjalili, S., &amp; Gandomi, A. H. (2020). Marine Predators Algorithm: A Nature-inspired Metaheuristic. Expert Systems with Applications, 113377. DOI: 10.1016/j.eswa.2020.113377</p>
+</div>
+<div class="section level2">
+<h2 id="license">License<a class="anchor" aria-label="anchor" href="#license"></a>
+</h2>
+<p>This package is licensed under the MIT License.</p>
+</div>
+<div class="section level2">
+<h2 id="acknowledgments">Acknowledgments<a class="anchor" aria-label="anchor" href="#acknowledgments"></a>
+</h2>
+<p>Original MATLAB implementation by Afshin Faramarzi and Seyedali Mirjalili</p>
+<p>Note that I have use generative AI to produce the initial translation of the MATLAB code into R. For this, I have used Vibe from Mistral AI (Devstral). In a second phase, I have checked the code manually and produced unit tests. In a third phase, I have use Claude code AI to reinforce documentation, especially for a general presentation of test functions.</p>
+</div>
+<div class="section level2">
+<h2 id="support">Support<a class="anchor" aria-label="anchor" href="#support"></a>
+</h2>
+<p>For issues, questions, or contributions, please open an issue on the <a href="">GitHub repository</a>.</p>
+</div>
+<div class="section level2">
+<h2 id="citation">Citation<a class="anchor" aria-label="anchor" href="#citation"></a>
+</h2>
+<p>If you use this package in your research, please cite the original paper:</p>
+<pre><code>@article{faramarzi2020marine,
+  title={Marine Predators Algorithm: A Nature-inspired Metaheuristic},
+  author={Faramarzi, Afshin and Heidarinejad, Mohammad and Mirjalili, Seyedali and Gandomi, Amir H},
+  journal={Expert Systems with Applications},
+  volume={113377},
+  year={2020},
+  publisher={Elsevier}
+}</code></pre>
+</div>
+</div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <div class="links">
 <h2 data-toc-skip>Links</h2>
 <ul class="list-unstyled">
-<li><a href="https://cloud.r-project.org/package=mpa" class="external-link">View on CRAN</a></li>
-<li><a href="https://github.com/urbs-dev/mpa/" class="external-link">Browse source code</a></li>
-<li><a href="https://github.com/urbs-dev/mpa/issues" class="external-link">Report a bug</a></li>
+<li><a href="https://github.com/urbs-dev/marinepredator/" class="external-link">Browse source code</a></li>
+<li><a href="https://github.com/urbs-dev/marinepredator/issues" class="external-link">Report a bug</a></li>
 </ul>
 </div>
 
@@ -99,7 +344,7 @@ Implementation of the Marine Predators Algorithm (MPA) in R. MPA is a nature-ins
 <div class="citation">
 <h2 data-toc-skip>Citation</h2>
 <ul class="list-unstyled">
-<li><a href="authors.html#citation">Citing mpa</a></li>
+<li><a href="authors.html#citation">Citing marinepredator</a></li>
 </ul>
 </div>
 
@@ -113,7 +358,12 @@ Implementation of the Marine Predators Algorithm (MPA) in R. MPA is a nature-ins
 </ul>
 </div>
 
-
+<div class="dev-status">
+<h2 data-toc-skip>Dev status</h2>
+<ul class="list-unstyled">
+<li><a href="https://lifecycle.r-lib.org/articles/stages.html#experimental" class="external-link"><img src="https://img.shields.io/badge/lifecycle-experimental-orange.svg" alt="Lifecycle: experimental"></a></li>
+</ul>
+</div>
 
   </div>
 </div>

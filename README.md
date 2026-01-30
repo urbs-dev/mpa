@@ -20,8 +20,8 @@ if (!require("remotes")) {
   install.packages("remotes")
 }
 
-# Install mpa
-remotes::install_github(repo = "urbs-dev/mpa")
+# Install marinepredator
+remotes::install_github(repo = "urbs-dev/marinepredator")
 ```
 
 ## Overview
@@ -44,7 +44,7 @@ The Marine Predators Algorithm (MPA) is inspired by the foraging behavior of mar
 ### Basic Example
 
 ```r
-library(mpa)
+library(marinepredator)
 
 # Optimize the Sphere function (F01)
 result <- mpa(
@@ -179,7 +179,7 @@ Note that I have use generative AI to produce the initial translation of the MAT
 
 ## Support
 
-For issues, questions, or contributions, please open an issue on the [GitHub repository]().
+For issues, questions, or contributions, please open an issue on the [GitHub repository](https://github.com/urbs-dev/marinepredator).
 
 ## Citation
 
