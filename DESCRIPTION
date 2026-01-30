@@ -1,7 +1,7 @@
 Package: marinepredator
 Type: Package
 Title: Marine Predators Algorithm
-Version: 0.0.0.9000
+Version: 0.0.1
 Authors@R:
     c(person("Marc", "Grossouvre", , "marc@grossouvre.fr", role = c("trl", "cre"),
            comment = "R implementation"),
