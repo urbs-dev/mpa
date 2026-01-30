@@ -1,0 +1,7 @@
+^.*\.Rproj$
+^\.Rproj\.user$
+^README.Rmd
+^README.html
+^docs$
+^_pkgdown\.yml$
+^coverage\.txt$

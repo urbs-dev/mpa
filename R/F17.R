@@ -1,0 +1,50 @@
+#' Branin Function (F17)
+#'
+#' @description
+#' A multimodal test function with three global minima, commonly used for
+#' testing optimization algorithms. Fixed dimension of 2.
+#'
+#' @param x Numeric vector of length 2 (2-dimensional input).
+#'
+#' @return Numeric scalar representing the function value.
+#'
+#' @details
+#' \strong{Formula:}
+#' \deqn{f(x) = \left(x_2 - \frac{5.1}{4\pi^2}x_1^2 + \frac{5}{\pi}x_1 - 6\right)^2
+#'   + 10\left(1 - \frac{1}{8\pi}\right)\cos(x_1) + 10}
+#'
+#' \strong{Global minimum:} \eqn{f^* \approx 0.397887} at three locations:
+#' \itemize{
+#'   \item \eqn{(-\pi, 12.275)}
+#'   \item \eqn{(\pi, 2.275)}
+#'   \item \eqn{(9.42478, 2.475)}
+#' }
+#'
+#' \strong{Characteristics:}
+#' \itemize{
+#'   \item Type: Multimodal
+#'   \item Separable: No
+#'   \item Differentiable: Yes
+#'   \item Fixed dimension: 2
+#'   \item Number of global minima: 3
+#'   \item Default bounds: \eqn{x_1 \in [-5, 10]}, \eqn{x_2 \in [0, 15]}
+#' }
+#'
+#' The Branin function is often used as a benchmark because it has three
+#' global minima that are well-separated.
+#'
+#' @seealso
+#' \code{\link{test-functions}} for an overview of all test functions,
+#' \code{\link{get_function_details}} to retrieve function parameters.
+#'
+#' @examples
+#' F17(c(-pi, 12.275))      # Returns approximately 0.398 (global minimum)
+#' F17(c(pi, 2.275))        # Returns approximately 0.398 (global minimum)
+#' F17(c(9.42478, 2.475))   # Returns approximately 0.398 (global minimum)
+#'
+#' @export
+F17 <- function(x) {
+  # Branin function
+  return((x[2] - (x[1]^2) * 5.1 / (4 * (pi^2)) + 5 / pi * x[1] - 6)^2 +
+           10 * (1 - 1 / (8 * pi)) * cos(x[1]) + 10)
+}
