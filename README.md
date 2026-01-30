@@ -1,28 +1,8 @@
----
-title: "Marine Predators Algorithm in R (mpa)"
-author: "Marc Grossouvre"
-date: "2025-12-29"
-output:
-  html_document:
-    toc: true
-    toc_float: true
-    theme: cerulean
-  pdf_document: default
-  word_document: default
----
-
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
-```
-
-
-
-
 # Marine Predators Algorithm in R (mpa)
 
 <!-- badges: start -->
 [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
-![Code Coverage](https://img.shields.io/badge/coverage-100.0%25-brightgreen.svg) 
+![Code Coverage](https://img.shields.io/badge/coverage-100.0%25-brightgreen.svg)
 <!-- coverage: end -->
 
 
@@ -63,7 +43,7 @@ The Marine Predators Algorithm (MPA) is inspired by the foraging behavior of mar
 
 ### Basic Example
 
-```{r basic-example}
+```r
 library(mpa)
 
 # Optimize the Sphere function (F01)
@@ -84,7 +64,7 @@ print(result)
 
 The package includes 23 standard benchmark functions:
 
-```{r benchmark-functions}
+```r
 # Get function details
 details <- get_function_details("F01")  # Sphere function
 
@@ -103,7 +83,7 @@ result <- mpa(
 
 You can use MPA with your own objective functions:
 
-```{r custom-function}
+```r
 # Define a custom function
 custom_function <- function(x) {
   return(sum((x - c(1, 2, 3))^2))  # Minimum at (1, 2, 3)
@@ -175,7 +155,7 @@ The MPA algorithm has several key parameters:
 
 The algorithm's performance can be evaluated using the convergence curve:
 
-```{r performance-plot, fig.height=4, fig.width=6}
+```r
 # Plot convergence curve
 plot(result$Convergence_curve, type = "l", col = "blue", lwd = 2,
      main = "MPA Convergence Curve",
